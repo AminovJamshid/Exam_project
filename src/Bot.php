@@ -28,9 +28,19 @@ class Bot {
 
             if ($text == "/start") {
                 $this->registerUser($chatId);
-                $this->sendMessage($chatId, "Botga xush kelibsiz!");
+                $this->sendMessage($chatId, "Welcome to the best Bot in every Universe!");
             }
         }
+    }
+
+    public function handleStartCommand($chatId): void
+    {
+        $pdo = DB::getConnection();
+
+        $stmt = $pdo->prepare("INSERT INTO users (chat_id, is_active) VALUES (:chat_id, 1) ON DUPLICATE KEY UPDATE is_active = 1");
+        $stmt->execute(['chat_id' => $chatId]);
+
+        $this->sendMessage($chatId, "Welcome to the best Bot in every Universe!");
     }
 
     private function registerUser($chatId): void
@@ -39,4 +49,5 @@ class Bot {
         $stmt = $pdo->prepare("INSERT INTO users (chat_id, is_active) VALUES (:chat_id, 1) ON DUPLICATE KEY UPDATE is_active = 1");
         $stmt->execute(['chat_id' => $chatId]);
     }
+
 }

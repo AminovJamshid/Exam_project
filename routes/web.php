@@ -7,21 +7,17 @@ use Jamshid\ExamProject\Send_massage;
 $router = new Router();
 
 $router->get('/', fn() => require_once 'view/view.php');
-$router->add('/post', function() {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $text = $_POST['text'];
-        if (strlen($text) <= 500) {
-            $pdo = DB::getConnection();
-            $stmt = $pdo->prepare("INSERT INTO posts (text, created_at) VALUES (:text, NOW())");
-            $stmt->execute(['text' => $text]);
+$router->post('/post', function() {
+    $text = $_POST['text'];
+    if (strlen($text) <= 500) {
+        $pdo = DB::getConnection();
+        $stmt = $pdo->prepare("INSERT INTO posts (text, created_at) VALUES (:text, NOW())");
+        $stmt->execute(['text' => $text]);
+        $sendMassage = new Send_massage();
+        $sendMassage->sendPostToAllUsers($text);
 
-            $sendMassage = new Send_massage();
-            $sendMassage->sendPostToAllUsers($text);
-
-            echo "Post yuborildi!";
-        } else {
-            echo "Post uzunligi 500 harfdan oshmasligi kerak!";
-        }
+        echo "Sending post!";
+    } else {
+        echo "Post length should not exceed 500 characters!";
     }
-    include __DIR__ . '/../view/view.php';
 });

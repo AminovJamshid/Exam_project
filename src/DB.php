@@ -4,11 +4,11 @@ namespace Jamshid\ExamProject;
 
 use PDO;
 class DB {
-    private static $pdo;
+    private static PDO $pdo;
 
     public static function getConnection(): PDO
     {
-        if (self::$pdo === null) {
+        if (!isset(self::$pdo)) {
             $host = $_ENV['DB_HOST'];
             $dbname = $_ENV['DB_NAME'];
             $username = $_ENV['DB_USER'];
@@ -22,7 +22,6 @@ class DB {
 
             self::$pdo = new PDO($dsn, $username, $password, $options);
         }
-
         return self::$pdo;
     }
 }

@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post Qo'shish</title>
+    <title>AddPostSendTelegram</title>
 </head>
 <body>
-<h1>Post Qo'shish</h1>
+<h1>Added post</h1>
 <form action="/post" method="post">
     <textarea name="text" rows="5" cols="50" maxlength="500" required></textarea><br>
-    <button type="submit">Yuborish</button>
+    <button type="submit">Send</button>
 </form>
 
-<h2>Barcha Postlar</h2>
+<h2>All posts</h2>
 <ul>
     <?php
     use Jamshid\ExamProject\DB;

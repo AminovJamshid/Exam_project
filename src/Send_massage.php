@@ -11,6 +11,7 @@ class Send_massage {
 
     public function sendPostToAllUsers($postText): void
     {
+
         $pdo = DB::getConnection();
         $users = $pdo->query("SELECT chat_id FROM users WHERE is_active = 1")->fetchAll();
 
@@ -18,6 +19,4 @@ class Send_massage {
             $this->bot->sendMessage($user['chat_id'], $postText);
         }
     }
-
-
 }

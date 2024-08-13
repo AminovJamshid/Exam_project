@@ -3,11 +3,24 @@
 namespace Jamshid\ExamProject;
 
 class Router {
-    private array $routes = [];
-
-    public function add($route, $callback): void
+    private  $update;
+    public function __construct()
     {
-        $this->routes[$route] = $callback;
+        $this->update = json_decode(file_get_contents('php://input'));
+    }
+
+    public function isTelegram(): bool
+    {
+        if (isset($this->update) && isset($this->update->update_id)) {
+            return true;
+        }
+        return false;
+    }
+    public function post($path, $callback): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) === $path) {
+            $callback();
+        }
     }
 
     public function get($path, $callback): void
@@ -16,14 +29,10 @@ class Router {
             $callback();
         }
     }
-    public function dispatch($url) {
-        foreach ($this->routes as $route => $callback) {
-            if ($url === $route) {
-                return call_user_func($callback);
-            }
-        }
-        http_response_code(404);
-        echo "404 Not Found";
-        exit;
+
+    public function getUpdates()
+    {
+        return $this->update;
     }
+
 }
