@@ -49,5 +49,4 @@ class Bot {
         $stmt = $pdo->prepare("INSERT INTO users (chat_id, is_active) VALUES (:chat_id, 1) ON DUPLICATE KEY UPDATE is_active = 1");
         $stmt->execute(['chat_id' => $chatId]);
     }
-
 }

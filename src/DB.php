@@ -22,6 +22,7 @@ class DB {
 
             self::$pdo = new PDO($dsn, $username, $password, $options);
         }
+
         return self::$pdo;
     }
 }
