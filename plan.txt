@@ -1,0 +1,15 @@
+Exam-project/
+├── routes/
+│ └── web.php
+├── src/
+│ ├── Bot.php
+│ ├── DB.php
+│ ├── Router.php
+│ └── Send_massage.php
+├── view/
+│ └── view.php/
+├──index.php
+├── .env
+├──bootstrap.php
+├──router.php
+└── README.md

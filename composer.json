@@ -1,0 +1,16 @@
+{
+    "name": "jamshid/exam_project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Jamshid\\ExamProject\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "AminovJamshid",
+            "email": "aminovjamshid777@gmail.com"
+        }
+    ],
+    "require": {}
+}
