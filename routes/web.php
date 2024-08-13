@@ -1,7 +1,12 @@
 <?php
 
+use Jamshid\ExamProject\DB;
+use Jamshid\ExamProject\Router;
+use Jamshid\ExamProject\Send_massage;
+
 $router = new Router();
 
+$router->get('/', fn() => require_once 'view/view.php');
 $router->add('/post', function() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $text = $_POST['text'];
@@ -10,8 +15,7 @@ $router->add('/post', function() {
             $stmt = $pdo->prepare("INSERT INTO posts (text, created_at) VALUES (:text, NOW())");
             $stmt->execute(['text' => $text]);
 
-            // Postni barcha foydalanuvchilarga yuborish
-            $sendMassage = new SendMassage();
+            $sendMassage = new Send_massage();
             $sendMassage->sendPostToAllUsers($text);
 
             echo "Post yuborildi!";
