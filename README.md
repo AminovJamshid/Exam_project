@@ -1,7 +1,7 @@
-# TODO App
+# Exam Project
 
 ## Description
-Yet another Todo app. This application allows users to manage their tasks efficiently. It includes features like only adding tasks. Additionally, it integrates with Telegram to manage tasks via a bot.
+Yet another Exam project. This application allows users to manage their tasks efficiently. It includes features like only adding tasks. Additionally, it integrates with Telegram to manage tasks via a bot.
 
 ## Requirements
 - PHP 8.3 or higher
